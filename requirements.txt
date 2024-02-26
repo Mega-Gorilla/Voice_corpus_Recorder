@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pydantic_settings
+streamlit
+pydub
+streamlit_webrtc
