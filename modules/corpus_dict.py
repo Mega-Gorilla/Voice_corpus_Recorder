@@ -1,3 +1,5 @@
+from config import file_path
+
 # 下記、コードに追加したコーパスをリストで返すコードを記載してください。
 # 下記関数は、自動参照されコーパスリストに追加されます。
 """
@@ -12,7 +14,7 @@
 def JVNV_Corpus()->dict:
 
     dict_list = []
-    with open('corpus_list\JVNV.csv', 'r', encoding='utf-8') as file:
+    with open(f'{file_path.corpus_folder}\JVNV.csv', 'r', encoding='utf-8') as file:
         for line in file:
             # 各行を'|'で分割
             parts = line.strip().split('|')
@@ -24,7 +26,7 @@ def JVNV_Corpus()->dict:
 
 def ITA_Corpus_Emotion()->dict:
     emotion_dict = []
-    with open('corpus_list\emotion_transcript_utf8.txt', 'r', encoding='utf-8') as file:
+    with open(f'{file_path.corpus_folder}\emotion_transcript_utf8.txt', 'r', encoding='utf-8') as file:
         for line in file:
             # 各行を':'で分割してキーと値を取り出す
             key, value = line.strip().split(':', 1)
@@ -37,7 +39,7 @@ def ITA_Corpus_Emotion()->dict:
 
 def ITA_Corpus_Recitation()->dict:
     emotion_dict = []
-    with open('corpus_list/recitation_transcript_utf8.txt', 'r', encoding='utf-8') as file:
+    with open(f'{file_path.corpus_folder}/recitation_transcript_utf8.txt', 'r', encoding='utf-8') as file:
         for line in file:
             # 各行を':'で分割してキーと値を取り出す
             key, value = line.strip().split(':', 1)
