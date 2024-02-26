@@ -1,7 +1,8 @@
-import streamlit as st
 import inspect
 import modules.corpus_dict as corpus_list
 import importlib
+from config import file_path
+import re
 
 def get_function_list(pyfile_Name:str):
     """
@@ -14,9 +15,6 @@ def get_function_list(pyfile_Name:str):
     functions = [name for name, obj in inspect.getmembers(corpus_dict_module) if inspect.isfunction(obj)]
     
     return functions
-    # Streamlit のセレクトボックスで関数一覧を表示する
-    select_box = st.selectbox('Select Voice Corpus', functions)
-    return select_box
 
 def execute_function(pyfile_Name:str,function_name: str) -> dict:
     '''
@@ -33,3 +31,16 @@ def execute_function(pyfile_Name:str,function_name: str) -> dict:
     
     # Return the result
     return result_dict
+
+def read_html(html_name:str) -> str:
+    # ファイルを読み込む
+    with open(f'{file_path.html_folder}/{html_name}.html', 'r', encoding='utf-8') as file:
+        content = file.read()
+
+    # //* *// で囲まれた文字列を {key} に置換
+    content = re.sub(r'/\*\*(.*?)\*\*/', r'{\1}', content)
+    content = content.replace('{','{{')
+    content = content.replace('}','}}')
+    content = content.replace('//*','{')
+    content = content.replace('*//','}')
+    return content
