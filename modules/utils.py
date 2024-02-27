@@ -2,8 +2,9 @@ import inspect
 import modules.corpus_dict as corpus_list
 import importlib
 from config import file_path
-import re
+import re,os
 import pykakasi
+from pathlib import Path
 
 def get_function_list(pyfile_Name:str):
     """
@@ -88,6 +89,15 @@ def auto_add_furigana(text:str) -> str:
     html_result += text[start:]
             
     return html_result
+
+
+def audio_player_if_exists(output_file_path:Path):
+    if output_file_path.exists():
+        with output_file_path.open("rb") as f:
+            audio_bytes = f.read()
+        return audio_bytes
+    else:
+        return None
 
 if __name__ == "__main__":
     test=' シュヴァイツァーは見習うべき人間です。'
