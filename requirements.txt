@@ -3,3 +3,5 @@ uvicorn
 pydantic_settings
 streamlit
 pydub
+pykakasi
+streamlit_webrtc
