@@ -1,4 +1,2 @@
-example/*
-__pycache__/*
-modules/__pycache__/**/*
+*.pyc
 save/**/*
