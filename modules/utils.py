@@ -36,7 +36,7 @@ def execute_function(pyfile_Name:str,function_name: str) -> dict:
 
 def read_html(html_name:str) -> str:
     """
-    htmlファイルを文字列で返す
+    htmlファイルをhtml内容文字列で返す
     """
     # ファイルを読み込む
     with open(f'{file_path.html_folder}/{html_name}.html', 'r', encoding='utf-8') as file:
@@ -90,14 +90,38 @@ def auto_add_furigana(text:str) -> str:
             
     return html_result
 
-
 def audio_player_if_exists(output_file_path:Path):
+    """
+    wavファイルをファイルパスから読み込みます
+    """
     if output_file_path.exists():
         with output_file_path.open("rb") as f:
             audio_bytes = f.read()
         return audio_bytes
     else:
         return None
+
+def list_directories(path):
+    """
+    指定されたパス内のフォルダ名のリストを返します。
+    パスが存在しない場合は、そのパスにフォルダを作成します。
+    
+    :param path: フォルダを検索または作成する親ディレクトリのパス
+    :return: フォルダ名のリスト
+    """
+    # 指定されたパスが存在しない場合、ディレクトリを作成
+    if not os.path.exists(path):
+        os.makedirs(path)
+        return []  # 新しく作成したばかりなので、中にフォルダは存在しない
+
+    # 指定されたパスがディレクトリであることを確認
+    if not os.path.isdir(path):
+        raise ValueError("指定されたパスはディレクトリではありません。")
+
+    # ディレクトリ内の全ての項目をリストアップし、その中からディレクトリのみを選択
+    directories = [item for item in os.listdir(path) if os.path.isdir(os.path.join(path, item))]
+    
+    return directories
 
 if __name__ == "__main__":
     test=' シュヴァイツァーは見習うべき人間です。'
