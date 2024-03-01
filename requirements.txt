@@ -5,3 +5,4 @@ streamlit
 pydub
 pykakasi
 streamlit_webrtc
+streamlit-datalist
