@@ -28,6 +28,14 @@ Created by 猩々 博士
     folder_list.insert(0,f"{time.strftime('%Y-%m-%d', time.localtime(current_time))} - name - {select_voiceCorpus}")
     save_folder = stDatalist("2.保存フォルダ名の設定", options=folder_list,index=0)
     corpus_num = st.number_input('3.選択されているコーパス番号',max_value=len(corpus_dict),min_value=1)
+
+    #コーパス達成度を表示
+    list_wav = list_wav_files(f"{file_path.save_folder}/{save_folder}")
+    if list_wav!=None:
+        done_percent = int((len(list_wav)/len(corpus_dict))*100)
+    else:
+        done_percent=0
+    st.progress(done_percent,text=F"達成度 [{done_percent}%]")
     
     # コーパスに基づいたテキストの表示
     corpus_key = None

@@ -5,6 +5,7 @@ from config import file_path
 import re,os
 import pykakasi
 from pathlib import Path
+import glob
 
 def get_function_list(pyfile_Name:str):
     """
@@ -122,6 +123,24 @@ def list_directories(path):
     directories = [item for item in os.listdir(path) if os.path.isdir(os.path.join(path, item))]
     
     return directories
+
+def list_wav_files(path):
+    """
+    指定されたパス内の.wavファイルのリストを返します。
+    指定されたフォルダが存在しない場合はNoneを返します。
+    
+    :param path: .wavファイルを検索するディレクトリのパス
+    :return: .wavファイルのリスト、またはNone
+    """
+    # 指定されたパスが存在するかどうかを確認
+    if not os.path.exists(path) or not os.path.isdir(path):
+        return None
+
+    # 指定されたパス内の.wavファイルを検索
+    wav_files = glob.glob(os.path.join(path, '*.wav'))
+    
+    # ファイル名のリストを返す（パスからファイル名のみを抽出）
+    return [os.path.basename(file) for file in wav_files]
 
 if __name__ == "__main__":
     test=' シュヴァイツァーは見習うべき人間です。'
