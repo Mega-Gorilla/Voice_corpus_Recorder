@@ -33,9 +33,11 @@ Created by 猩々 博士
     list_wav = list_wav_files(f"{file_path.save_folder}/{save_folder}")
     if list_wav!=None:
         done_percent = int((len(list_wav)/len(corpus_dict))*100)
+        wav_len = len(list_wav)
     else:
         done_percent=0
-    st.progress(done_percent,text=F"達成度 [{done_percent}%]")
+        wav_len=0
+    st.progress(done_percent,text=F"達成度 [{done_percent}% {wav_len}/{len(corpus_dict)}]")
     
     # コーパスに基づいたテキストの表示
     corpus_key = None
