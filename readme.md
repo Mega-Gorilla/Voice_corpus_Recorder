@@ -16,10 +16,16 @@
 - **Corpus Display:** アプリケーションがサポートする音声コーパスを簡単に閲覧できます。
 - **Recording Functionality:** ガイド付きプロンプトで声を録音し、コーパス作成時の一貫性と品質を保証します。
 - **Automated Management:** コーパスファイル名と録音スクリプトの管理を自動で行い、手作業と潜在的なエラーを減らします。
+- **自動ルビふり** 提供されたコーパスに対して、pykakasiを用いて自動読み仮名ふりを行います。原稿に読み仮名が自動生成されるため、原稿の読み間違えリスクを軽減します。
 
 ## 対応コーパス
 - **ita-corpus** - ITAコーパスは、合計424文からなる，音素バランスを考慮したパブリックドメインの日本語テキストコーパスです． https://github.com/Haruqa/ita-corpus
+
 - **JVNV**  - JVNVは，言語音声と非言語音声から成る日本語感情音声コーパスです． https://sites.google.com/site/shinnosuketakamichi/research-topics/jvnv_corpus
+
+- **JSUT** - JSUT コレクションは，声・歌・音声模倣をつなげるための音声コーパスです．https://sites.google.com/site/shinnosuketakamichi/publication/jsut
+
+- **JVS voiceactress100** - JVSコーパスvoiceactress100は、声優統計コーパス部族のバランス分に対して句読点情報が付与されたものになります。日本声優統計学会にて推奨されているコーパスです https://sites.google.com/site/shinnosuketakamichi/research-topics/jvs_corpus
 
 ※コーパスの追加依頼がございましたらissueより提案ください。
 
