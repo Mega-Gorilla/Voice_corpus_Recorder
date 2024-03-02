@@ -54,7 +54,10 @@ def read_html(html_name:str) -> str:
 def kanji_to_furigana(text:str) -> str:
     kks = pykakasi.kakasi()
     furigana = kks.convert(text)
-    furigana = furigana[0]['hira']
+    marge_furigana = ""
+    for item in furigana:
+        marge_furigana+=item['hira']
+    furigana = marge_furigana
     
     #textにひらがなが含まれている場合
     kanji_pattern = re.compile(r'[一-龥]')
