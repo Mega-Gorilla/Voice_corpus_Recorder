@@ -1,4 +1,4 @@
-# コーパスレコーダー
+# ボイスコーパスレコーダー
 
 <p align="center">
   <img src="https://github.com/Mega-Gorilla/Voice_corpus_Recorder/blob/main/images/image1.png"/>
