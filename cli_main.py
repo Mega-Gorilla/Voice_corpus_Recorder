@@ -54,10 +54,13 @@ if __name__ == "__main__":
         
         # Streamlit設定
         flag_options = {
-            "server.port": 8501,
-            "global.developmentMode": False,
-            "server.fileWatcherType": "none",  # ファイル監視を無効化
-        }
+        "server.port": 8501,
+        "global.developmentMode": False,
+        "server.maxUploadSize": 50,  # アップロードサイズ制限を増やす
+        "server.maxMessageSize": 50,  # メッセージサイズ制限を増やす
+        "server.enableXsrfProtection": False,  # XSRF保護を無効化
+        "server.enableCORS": False,  # CORSを無効化
+    }
 
         # 設定をロード
         bootstrap.load_config_options(flag_options=flag_options)
