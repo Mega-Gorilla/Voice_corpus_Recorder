@@ -1,4 +1,4 @@
-from config import file_path
+from config.config import file_path
 
 # 下記、コードに追加したコーパスをリストで返すコードを記載してください。
 # 下記関数は、自動参照されコーパスリストに追加されます。

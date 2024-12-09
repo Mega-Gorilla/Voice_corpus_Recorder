@@ -1,7 +1,7 @@
 import inspect
 import modules.corpus_dict as corpus_list
 import importlib
-from config import file_path
+from config.config import file_path
 import re,os
 import pykakasi
 from pathlib import Path

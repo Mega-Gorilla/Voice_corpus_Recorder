@@ -1,7 +1,7 @@
 fastapi
 uvicorn
 pydantic_settings
-streamlit
+streamlit==1.29.0
 pydub
 pykakasi
 streamlit_webrtc

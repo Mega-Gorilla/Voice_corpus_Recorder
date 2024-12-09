@@ -1,7 +1,7 @@
 from modules.corpus_dict import *
 from modules.utils import *
 from modules.webrtc import WebRTCRecord
-from config import file_path
+from config.config import file_path
 import streamlit as st
 import time
 from pathlib import Path
