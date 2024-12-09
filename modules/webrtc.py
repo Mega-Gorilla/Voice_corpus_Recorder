@@ -5,6 +5,7 @@ import streamlit as st
 from streamlit_webrtc import WebRtcMode, webrtc_streamer
 import os
 import stat
+import math
 
 class WebRTCRecord:
     def __init__(self):
@@ -37,7 +38,6 @@ class WebRTCRecord:
 
     def recording(self, output_wav_name: str, wav_file_path: Path):
         status_box = st.empty()
-
         while True:
             if self.webrtc_ctx.audio_receiver:
                 try:
@@ -45,7 +45,6 @@ class WebRTCRecord:
                 except queue.Empty:
                     status_box.warning("No frame arrived.")
                     continue
-
                 status_box.info("Now Recording...")
                 sound_chunk = pydub.AudioSegment.empty()
                 
@@ -57,11 +56,12 @@ class WebRTCRecord:
                             frame_rate=audio_frame.sample_rate,
                             channels=len(audio_frame.layout.channels),
                         )
+                        # ゲイン調整を適用
+                        sound = sound.apply_gain(20 * math.log10(st.session_state.gain_value))
                         sound_chunk += sound
                     except Exception as e:
                         status_box.error(f"Error processing audio frame: {e}")
                         continue
-
                 if len(sound_chunk) > 0:
                     st.session_state["audio_buffer"] += sound_chunk
             else:
