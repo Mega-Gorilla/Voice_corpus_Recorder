@@ -35,6 +35,11 @@ def execute_function(pyfile_Name:str,function_name: str) -> dict:
     # Return the result
     return result_dict
 
+def ensure_directory_exists(path):
+    """指定されたパスのディレクトリが存在しない場合、作成します"""
+    if not os.path.exists(path):
+        os.makedirs(path)
+
 def read_html(html_name:str) -> str:
     """
     htmlファイルをhtml内容文字列で返す
@@ -94,7 +99,7 @@ def auto_add_furigana(text:str) -> str:
             
     return html_result
 
-def audio_player_if_exists(output_file_path:Path):
+def audio_player_if_exists(output_file_path: Path):
     """
     wavファイルをファイルパスから読み込みます
     """
@@ -102,47 +107,34 @@ def audio_player_if_exists(output_file_path:Path):
         with output_file_path.open("rb") as f:
             audio_bytes = f.read()
         return audio_bytes
-    else:
-        return None
+    return None
 
 def list_directories(path):
     """
     指定されたパス内のフォルダ名のリストを返します。
     パスが存在しない場合は、そのパスにフォルダを作成します。
-    
-    :param path: フォルダを検索または作成する親ディレクトリのパス
-    :return: フォルダ名のリスト
     """
-    # 指定されたパスが存在しない場合、ディレクトリを作成
-    if not os.path.exists(path):
-        os.makedirs(path)
-        return []  # 新しく作成したばかりなので、中にフォルダは存在しない
+    ensure_directory_exists(path)
 
-    # 指定されたパスがディレクトリであることを確認
     if not os.path.isdir(path):
         raise ValueError("指定されたパスはディレクトリではありません。")
 
-    # ディレクトリ内の全ての項目をリストアップし、その中からディレクトリのみを選択
     directories = [item for item in os.listdir(path) if os.path.isdir(os.path.join(path, item))]
-    
     return directories
 
 def list_wav_files(path):
     """
     指定されたパス内の.wavファイルのリストを返します。
-    指定されたフォルダが存在しない場合はNoneを返します。
-    
-    :param path: .wavファイルを検索するディレクトリのパス
-    :return: .wavファイルのリスト、またはNone
+    指定されたフォルダが存在しない場合は作成してNoneを返します。
     """
-    # 指定されたパスが存在するかどうかを確認
-    if not os.path.exists(path) or not os.path.isdir(path):
+    if not os.path.exists(path):
+        ensure_directory_exists(path)
         return None
 
-    # 指定されたパス内の.wavファイルを検索
+    if not os.path.isdir(path):
+        return None
+
     wav_files = glob.glob(os.path.join(path, '*.wav'))
-    
-    # ファイル名のリストを返す（パスからファイル名のみを抽出）
     return [os.path.basename(file) for file in wav_files]
 
 if __name__ == "__main__":
